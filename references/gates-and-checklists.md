@@ -8,6 +8,15 @@
 - Task DAG dependency-valid.
 - Every task has validation requirements.
 - Every medium+ risk task has rollback notes.
+- Execution mode selected (`single-agent`, `multi-agent-subagents`, or `multi-agent-team`) with rationale.
+
+## Adaptive Mode Checklist
+
+- Are there at least two independent task slices?
+- Is shared file overlap low enough for safe parallelism?
+- Do risk controls require independent/adversarial review?
+- Is coordination overhead likely lower than expected parallel gain?
+- Is fallback path to `single-agent` documented if coordination degrades?
 
 ## Per-Batch Checklist
 

@@ -115,6 +115,36 @@ Exit criteria:
 
 - Preflight passes.
 
+## Phase 4.5: Adaptive Execution Mode Selection
+
+Select execution mode after preflight and before edits.
+
+Modes:
+
+- `single-agent`: one executor handles all tasks sequentially.
+- `multi-agent-subagents`: parallel independent tasks that converge through one coordinator.
+- `multi-agent-team`: parallel interdependent tasks with explicit cross-task coordination.
+
+Decision signals:
+
+- Prefer `single-agent` when work is mostly sequential, tightly coupled, or concentrated in the same files.
+- Prefer `multi-agent-subagents` when at least two independent task slices exist with low file overlap.
+- Prefer `multi-agent-team` when tasks are parallel but interdependent, or when risk tier is medium/high and independent verification is required.
+- For small scope with high coordination overhead, downgrade to `single-agent`.
+
+Required guardrails for multi-agent modes:
+
+- Strict file ownership per task to minimize conflicts.
+- One shared source of truth for task states and dependencies.
+- Mandatory conflict check before final gate.
+- Mandatory independent review evidence for tier 1+ tasks.
+- Automatic fallback to `single-agent` if coordination overhead exceeds throughput gains.
+
+Mode re-evaluation:
+
+- Re-evaluate at each checkpoint.
+- Downgrade or upgrade mode when blockers, conflict rates, or dependency drift change.
+
 ## Phase 5: Controlled Execution
 
 Execute in small, verifiable batches.
@@ -188,6 +218,7 @@ Return:
 
 - `Action`: plan+execute completed or blocked
 - `Scope`: repo and mission scope
+- `Execution mode`: `single-agent|multi-agent-subagents|multi-agent-team`
 - `Result`: objective status and key changes
 - `Validation`: checks run and outcomes
 - `Confidence`: `High|Medium|Low`
