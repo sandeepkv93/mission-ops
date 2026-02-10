@@ -1,0 +1,36 @@
+{
+  "repo_root": "",
+  "branch": "",
+  "head_commit": "",
+  "generated_at": "",
+  "mission_objective": "",
+  "scope": "",
+  "tasks": [
+    {
+      "task_id": "T-1",
+      "goal": "",
+      "risk_tier": 0,
+      "checks": [
+        {
+          "name": "",
+          "command": "",
+          "required": true,
+          "evidence": ""
+        }
+      ],
+      "rollback": ""
+    }
+  ],
+  "checks": {
+    "baseline": [],
+    "batch": [],
+    "final": []
+  },
+  "gate_results": {
+    "preflight": "pending",
+    "batch": "pending",
+    "final": "pending"
+  },
+  "confidence": "Medium",
+  "open_risks": []
+}

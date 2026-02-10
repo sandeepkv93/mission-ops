@@ -39,6 +39,12 @@ Artifacts:
 - `run-log.md`
 - `final-report.md`
 
+Template references:
+
+- `references/mission-plan-template.md`
+- `references/final-report-template.md`
+- `references/validation-matrix-template.json`
+
 ## Installation
 
 ### Option A: Clone directly
@@ -69,6 +75,12 @@ Targets:
 - `./scripts/install.sh claude`
 - `./scripts/install.sh both`
 
+Optional artifact bootstrap:
+
+```bash
+./scripts/bootstrap_artifacts.sh
+```
+
 ## Usage
 
 Invoke by skill name in your client:
@@ -85,9 +97,13 @@ mission-ops/
 ├── agents/
 │   └── openai.yaml
 ├── references/
-│   └── gates-and-checklists.md
+│   ├── gates-and-checklists.md
+│   ├── mission-plan-template.md
+│   ├── final-report-template.md
+│   └── validation-matrix-template.json
 └── scripts/
-    └── install.sh
+    ├── install.sh
+    └── bootstrap_artifacts.sh
 ```
 
 ## Compatibility Notes

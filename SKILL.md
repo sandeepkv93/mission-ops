@@ -1,6 +1,6 @@
 ---
 name: mission-ops
-description: Execute software missions end-to-end with an integrated deep planning and execution workflow: repository reconnaissance, baseline validation, task DAG planning, gated implementation, continuous verification, rollback readiness, and final evidence reporting. Use when users ask for thorough, low-error execution that should not miss important details.
+description: Execute software missions end-to-end with an integrated deep planning and execution workflow: repository reconnaissance, baseline validation, task DAG planning, gated implementation, continuous verification, rollback readiness, and final evidence reporting. Trigger when users ask to plan and execute thoroughly, reduce execution errors, avoid missing details, run production-safe changes, or request strict validation gates.
 ---
 
 # Mission Ops
@@ -176,6 +176,12 @@ Write:
 - `<base>/run-log.md`
 - `<base>/final-report.md`
 
+Use templates from:
+
+- `references/mission-plan-template.md`
+- `references/final-report-template.md`
+- `references/validation-matrix-template.json`
+
 ## Required Output Contract (Chat)
 
 Return:
@@ -208,6 +214,30 @@ Mandatory controls:
 - Never skip regression checks for touched critical paths.
 - Mark unknowns explicitly instead of guessing.
 - Stop early when control requirements cannot be met safely.
+
+## Mission Quality Checklist
+
+Before marking the mission complete, verify all conditions:
+
+- Recon evidence captured and reflected in plan assumptions.
+- Every completed task has command/output evidence in run log.
+- Every medium+ risk task has explicit rollback notes.
+- Validation matrix entries exist for each task and each gate.
+- Final report includes objective status, residual risks, and next actions.
+- No unchecked high-risk unknowns remain.
+
+If any item fails, mission status must remain `blocked` or `partial`, never `complete`.
+
+## Stop and Escalation Matrix
+
+- Stop immediately when:
+  - irreversible action is required without explicit user confirmation
+  - destructive command is requested without approval
+  - risk tier controls cannot be satisfied
+- Escalate with one recommendation when:
+  - baseline is red and root cause is ambiguous
+  - required tools/commands are unavailable
+  - scope ambiguity affects safety or correctness
 
 ## Efficiency Rules
 
