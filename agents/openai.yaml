@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mission Ops"
+  short_description: "Plan and execute missions with strict verification gates"
+  default_prompt: "Use $mission-ops to run a deep plan-and-execute workflow for this repo with risk tiers, rollback readiness, and final evidence artifacts."
