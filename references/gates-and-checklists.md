@@ -18,6 +18,13 @@
 - Is coordination overhead likely lower than expected parallel gain?
 - Is fallback path to `single-agent` documented if coordination degrades?
 
+## Multi-Agent Anti-Patterns
+
+- Parallelizing a single critical path with no true independence.
+- Assigning the same file to multiple active owners.
+- Running high-risk work without an independent reviewer.
+- Continuing multi-agent mode after repeated merge/conflict churn.
+
 ## Per-Batch Checklist
 
 - Change set matches planned task scope.

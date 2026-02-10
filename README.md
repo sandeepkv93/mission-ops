@@ -44,6 +44,10 @@ Fallback behavior:
 
 - Mission Ops automatically downgrades to `single-agent` if coordination overhead, conflict rate, or dependency drift outweighs parallel gains.
 
+Operational cadence:
+
+- Mission Ops runs checkpoint rhythm (about every 15-30 minutes) to update state, reassess mode fit, and rescope quickly when needed.
+
 ## Output Artifacts
 
 Cache base directory is selected in this order:

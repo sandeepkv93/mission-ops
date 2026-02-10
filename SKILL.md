@@ -11,6 +11,12 @@ Run a deterministic plan-and-execute workflow with explicit quality gates.
 
 Always run both planning and execution in one skill flow unless blocked by critical unknowns.
 
+Operating roles (lightweight):
+
+- `coordinator`: maintains mission objective, task state, and gate decisions.
+- `executor`: implements assigned change slices.
+- `reviewer` (required for tier 1+): independently challenges assumptions and verifies risky outputs.
+
 Inputs:
 
 - Required: `objective`
@@ -149,6 +155,12 @@ Mode re-evaluation:
 
 Execute in small, verifiable batches.
 
+Quarterdeck rhythm:
+
+- Run checkpoints at a fixed cadence (typically every 15-30 minutes).
+- At each checkpoint: update task states, evaluate blockers, re-check execution mode fit, and decide one concrete next action.
+- If progress drifts from mission metric, explicitly choose: continue, narrow scope, rollback batch, or stop.
+
 Batch protocol:
 
 1. Apply minimal change set.
@@ -166,6 +178,8 @@ Rules:
 
 - No task is complete without evidence.
 - Keep one active task per owner unless explicit multitask need is justified.
+- Avoid splitting the same file across multiple active owners.
+- If conflict churn rises or dependency coupling increases, collapse to `single-agent` mode.
 
 Exit criteria:
 
