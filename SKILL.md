@@ -1,6 +1,6 @@
 ---
 name: mission-ops
-description: Execute software missions end-to-end with an integrated deep planning and execution workflow: repository reconnaissance, baseline validation, task DAG planning, gated implementation, continuous verification, rollback readiness, and final evidence reporting. Trigger when users ask to plan and execute thoroughly, reduce execution errors, avoid missing details, run production-safe changes, or request strict validation gates.
+description: "Execute software missions end-to-end with an integrated deep planning and execution workflow: repository reconnaissance, baseline validation, task DAG planning, gated implementation, continuous verification, rollback readiness, and final evidence reporting. Trigger when users ask to plan and execute thoroughly, reduce execution errors, avoid missing details, run production-safe changes, or request strict validation gates."
 ---
 
 # Mission Ops
