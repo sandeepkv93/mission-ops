@@ -20,9 +20,51 @@ Use Mission Ops when you want:
 3. Baseline validation
 4. Task DAG planning
 5. Preflight gate
-6. Controlled execution
-7. Final verification gate
-8. Evidence and closeout
+6. Adaptive execution mode selection
+7. Controlled execution
+8. Final verification gate
+9. Evidence and closeout
+
+## Adaptive Execution Modes
+
+Mission Ops selects execution style after preflight and can re-evaluate at checkpoints:
+
+- `single-agent`: sequential or tightly-coupled work with high shared-file overlap.
+- `multi-agent-subagents`: parallel independent slices that converge through one coordinator.
+- `multi-agent-team`: parallel interdependent work requiring explicit cross-task coordination.
+
+Selection signals:
+
+- parallelizable task count
+- shared file overlap/conflict risk
+- risk tier and independent review requirements
+- expected coordination overhead vs throughput gain
+
+Fallback behavior:
+
+- Mission Ops automatically downgrades to `single-agent` if coordination overhead, conflict rate, or dependency drift outweighs parallel gains.
+
+## Flow Diagram
+
+```mermaid
+flowchart TD
+    A["Intake<br/>Objective + Scope + Constraints"] --> B["Deep Recon<br/>Repo, manifests, commands, tests, invariants"]
+    B --> C["Baseline Validation<br/>Smoke/fast checks"]
+    C --> D["Task DAG Plan<br/>Tasks, deps, risk, rollback, validation"]
+    D --> E{"Preflight Gate<br/>Plan valid?"}
+    E -- "No" --> D
+    E -- "Yes" --> F{"Adaptive Mode Selection"}
+    F --> F1["single-agent"]
+    F --> F2["multi-agent-subagents"]
+    F --> F3["multi-agent-team"]
+    F1 --> G["Controlled Execution<br/>Small batches + evidence"]
+    F2 --> G
+    F3 --> G
+    G --> H{"Checkpoint Re-eval<br/>mode still optimal?"}
+    H -- "No" --> F
+    H -- "Yes" --> I["Final Verification Gate<br/>Regression + broader checks"]
+    I --> J["Evidence & Closeout<br/>mission-plan, validation-matrix, run-log, final-report"]
+```
 
 ## Output Artifacts
 
@@ -87,6 +129,20 @@ Invoke by skill name in your client:
 
 - "Use mission-ops to complete this objective end-to-end"
 - "Run mission-ops on scope=internal/auth with low risk tolerance"
+- "Use mission-ops and choose the best execution mode automatically"
+
+## Output Contract (Runtime)
+
+Mission Ops final response includes:
+
+- `Action`
+- `Scope`
+- `Execution mode`
+- `Result`
+- `Validation`
+- `Confidence`
+- `Open risks`
+- `Next step`
 
 ## File Structure
 
