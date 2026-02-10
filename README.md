@@ -44,28 +44,6 @@ Fallback behavior:
 
 - Mission Ops automatically downgrades to `single-agent` if coordination overhead, conflict rate, or dependency drift outweighs parallel gains.
 
-## Flow Diagram
-
-```mermaid
-flowchart TD
-    A["Intake<br/>Objective + Scope + Constraints"] --> B["Deep Recon<br/>Repo, manifests, commands, tests, invariants"]
-    B --> C["Baseline Validation<br/>Smoke/fast checks"]
-    C --> D["Task DAG Plan<br/>Tasks, deps, risk, rollback, validation"]
-    D --> E{"Preflight Gate<br/>Plan valid?"}
-    E -- "No" --> D
-    E -- "Yes" --> F{"Adaptive Mode Selection"}
-    F --> F1["single-agent"]
-    F --> F2["multi-agent-subagents"]
-    F --> F3["multi-agent-team"]
-    F1 --> G["Controlled Execution<br/>Small batches + evidence"]
-    F2 --> G
-    F3 --> G
-    G --> H{"Checkpoint Re-eval<br/>mode still optimal?"}
-    H -- "No" --> F
-    H -- "Yes" --> I["Final Verification Gate<br/>Regression + broader checks"]
-    I --> J["Evidence & Closeout<br/>mission-plan, validation-matrix, run-log, final-report"]
-```
-
 ## Output Artifacts
 
 Cache base directory is selected in this order:
@@ -121,6 +99,28 @@ Optional artifact bootstrap:
 
 ```bash
 ./scripts/bootstrap_artifacts.sh
+```
+
+## Flow Diagram
+
+```mermaid
+flowchart TD
+    A["Intake<br/>Objective + Scope + Constraints"] --> B["Deep Recon<br/>Repo, manifests, commands, tests, invariants"]
+    B --> C["Baseline Validation<br/>Smoke/fast checks"]
+    C --> D["Task DAG Plan<br/>Tasks, deps, risk, rollback, validation"]
+    D --> E{"Preflight Gate<br/>Plan valid?"}
+    E -- "No" --> D
+    E -- "Yes" --> F{"Adaptive Mode Selection"}
+    F --> F1["single-agent"]
+    F --> F2["multi-agent-subagents"]
+    F --> F3["multi-agent-team"]
+    F1 --> G["Controlled Execution<br/>Small batches + evidence"]
+    F2 --> G
+    F3 --> G
+    G --> H{"Checkpoint Re-eval<br/>mode still optimal?"}
+    H -- "No" --> F
+    H -- "Yes" --> I["Final Verification Gate<br/>Regression + broader checks"]
+    I --> J["Evidence & Closeout<br/>mission-plan, validation-matrix, run-log, final-report"]
 ```
 
 ## Usage
