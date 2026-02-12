@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TARGET="${1:-both}"
+TARGET="${1:-all}"
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 SRC_DIR="$(cd -- "${SCRIPT_DIR}/.." && pwd)"
 
@@ -22,12 +22,16 @@ case "${TARGET}" in
   claude)
     install_one "${HOME}/.claude/skills"
     ;;
-  both)
+  cursor)
+    install_one "${HOME}/.cursor/skills"
+    ;;
+  both|all)
     install_one "${HOME}/.codex/skills"
     install_one "${HOME}/.claude/skills"
+    install_one "${HOME}/.cursor/skills"
     ;;
   *)
-    echo "Usage: $0 [codex|claude|both]" >&2
+    echo "Usage: $0 [codex|claude|cursor|both|all]" >&2
     exit 1
     ;;
 esac

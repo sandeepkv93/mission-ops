@@ -211,6 +211,7 @@ Cache base selection order:
 
 - `.codex/`
 - `.claude/`
+- `.cursor/`
 - `.agent-cache/`
 
 Write:

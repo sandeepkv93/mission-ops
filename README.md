@@ -54,7 +54,8 @@ Cache base directory is selected in this order:
 
 1. `.codex/`
 2. `.claude/`
-3. `.agent-cache/`
+3. `.cursor/`
+4. `.agent-cache/`
 
 Artifacts:
 
@@ -85,6 +86,12 @@ git clone https://github.com/sandeepkv93/mission-ops.git ~/.codex/skills/mission
 git clone https://github.com/sandeepkv93/mission-ops.git ~/.claude/skills/mission-ops
 ```
 
+#### Cursor
+
+```bash
+git clone https://github.com/sandeepkv93/mission-ops.git ~/.cursor/skills/mission-ops
+```
+
 ### Option B: Install script
 
 ```bash
@@ -97,7 +104,9 @@ Targets:
 
 - `./scripts/install.sh codex`
 - `./scripts/install.sh claude`
-- `./scripts/install.sh both`
+- `./scripts/install.sh cursor`
+- `./scripts/install.sh all`
+- `./scripts/install.sh both` (alias of `all`)
 
 Optional artifact bootstrap:
 

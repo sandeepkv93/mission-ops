@@ -2,7 +2,7 @@
 set -euo pipefail
 
 BASE=""
-for d in .codex .claude .agent-cache; do
+for d in .codex .claude .cursor .agent-cache; do
   if [ -d "$d" ]; then
     BASE="$d"
     break
