@@ -16,6 +16,7 @@ Operating roles (lightweight):
 - `coordinator`: maintains mission objective, task state, and gate decisions.
 - `executor`: implements assigned change slices.
 - `reviewer` (required for tier 1+): independently challenges assumptions and verifies risky outputs.
+- `principal_reviewer` (required for all tiers): performs independent post-verification review as a hard gate.
 
 Inputs:
 
@@ -203,7 +204,54 @@ Exit criteria:
 
 - Final gate result documented.
 
-## Phase 7: Evidence and Closeout
+## Phase 7: Principal Engineer Review Gate
+
+Run an independent review after Phase 6 and before closeout.
+
+Review requirements:
+
+- Reviewer must be independent from the executor for the reviewed change set.
+- Review must cover objective fulfillment, risk controls, rollback readiness, and validation sufficiency.
+- Every finding must include a unique ID, severity, actionable remediation, and status.
+
+Hard gate policy:
+
+- Mission cannot proceed past this phase until review is completed and recorded.
+- Gate is `pass` only when reviewer decision is `approved`.
+
+Artifacts:
+
+- `<base>/principal-review.md`
+- `<base>/principal-review.json`
+
+Exit criteria:
+
+- Principal review completed with explicit decision (`approved|changes_required|blocked`).
+- Review artifacts written in both markdown and JSON.
+- Gate result documented in validation matrix.
+
+## Phase 8: Review Comment Resolution
+
+Resolve all principal review comments before closeout.
+
+Resolution requirements:
+
+- All comments from `principal-review.json` must be moved to `resolved`.
+- Each resolution must include validation evidence.
+- Re-review is required after remediation to confirm closure.
+
+Failure protocol:
+
+- If any review finding cannot be resolved, mission status is `blocked`.
+- Do not proceed to closeout with unresolved review findings.
+
+Exit criteria:
+
+- Zero open findings remain.
+- Reviewer re-verification complete.
+- Gate result documented in validation matrix.
+
+## Phase 9: Evidence and Closeout
 
 Generate mission artifacts in selected cache base directory:
 
@@ -220,12 +268,16 @@ Write:
 - `<base>/validation-matrix.json`
 - `<base>/run-log.md`
 - `<base>/final-report.md`
+- `<base>/principal-review.md`
+- `<base>/principal-review.json`
 
 Use templates from:
 
 - `references/mission-plan-template.md`
 - `references/final-report-template.md`
 - `references/validation-matrix-template.json`
+- `references/principal-review-template.md`
+- `references/principal-review-template.json`
 
 ## Required Output Contract (Chat)
 
@@ -236,6 +288,8 @@ Return:
 - `Execution mode`: `single-agent|multi-agent-subagents|multi-agent-team`
 - `Result`: objective status and key changes
 - `Validation`: checks run and outcomes
+- `Principal review`: decision and reviewer signoff status
+- `Review resolution`: resolved/open findings summary
 - `Confidence`: `High|Medium|Low`
 - `Open risks`: remaining risks/unknowns
 - `Next step`: immediate recommendation
@@ -249,6 +303,7 @@ Return:
 
 Mandatory controls:
 
+- All tiers: principal review hard gate + complete comment resolution before closeout
 - Tier 1+: independent review signal + negative/failure-path validation
 - Tier 2+: adversarial check + go/no-go checkpoint + staged rollout when possible
 - Tier 3: explicit human confirmation before irreversible actions
@@ -260,6 +315,7 @@ Mandatory controls:
 - Never skip regression checks for touched critical paths.
 - Mark unknowns explicitly instead of guessing.
 - Stop early when control requirements cannot be met safely.
+- Never close mission while any principal review finding is unresolved.
 
 ## Mission Quality Checklist
 
@@ -269,6 +325,8 @@ Before marking the mission complete, verify all conditions:
 - Every completed task has command/output evidence in run log.
 - Every medium+ risk task has explicit rollback notes.
 - Validation matrix entries exist for each task and each gate.
+- Principal review artifacts exist and include explicit reviewer decision.
+- All principal review findings are resolved with evidence.
 - Final report includes objective status, residual risks, and next actions.
 - No unchecked high-risk unknowns remain.
 

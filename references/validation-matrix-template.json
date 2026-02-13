@@ -24,12 +24,29 @@
   "checks": {
     "baseline": [],
     "batch": [],
-    "final": []
+    "final": [],
+    "principal_review": [],
+    "review_resolution": []
   },
   "gate_results": {
     "preflight": "pending",
     "batch": "pending",
-    "final": "pending"
+    "final": "pending",
+    "principal_review": "pending",
+    "review_resolution": "pending"
+  },
+  "principal_review_summary": {
+    "total": 0,
+    "by_severity": {
+      "low": 0,
+      "medium": 0,
+      "high": 0,
+      "critical": 0
+    },
+    "resolved": 0,
+    "open": 0,
+    "approved_by": "",
+    "approved_at": ""
   },
   "confidence": "Medium",
   "open_risks": []

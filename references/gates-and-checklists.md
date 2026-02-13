@@ -39,6 +39,21 @@
 - Regression pack executed.
 - Open risks documented with owner and next action.
 
+## Principal Review Gate Checklist
+
+- Principal reviewer is independent from executor for this mission.
+- Review artifacts exist in both formats (`principal-review.md` and `principal-review.json`).
+- Every finding has `id`, severity, remediation action, and status.
+- Reviewer gate decision is explicit (`approved|changes_required|blocked`).
+- Gate decision is captured in validation matrix.
+
+## Review Resolution Checklist
+
+- All findings from principal review are resolved (no `open` status).
+- Each resolved finding has validation evidence.
+- Re-review confirmation is captured after remediation.
+- Mission remains blocked if any finding is unresolved.
+
 ## Suggested JSON schema for validation-matrix.json
 
 Top-level keys:
@@ -52,5 +67,6 @@ Top-level keys:
 - `tasks`
 - `checks`
 - `gate_results`
+- `principal_review_summary`
 - `confidence`
 - `open_risks`

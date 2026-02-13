@@ -15,6 +15,10 @@
 - Per-batch checks run:
 - Final gate checks run:
 - Regression pack status:
+- Principal review gate status:
+- Review resolution status:
+- Principal reviewer signoff:
+- Principal review findings summary:
 
 ## Risks and Unknowns
 - Open risks:

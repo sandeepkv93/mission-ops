@@ -1,0 +1,36 @@
+{
+  "mission_id": "",
+  "mission_objective": "",
+  "scope": "",
+  "reviewer": "",
+  "review_started_at": "",
+  "review_completed_at": "",
+  "gate_decision": "changes_required",
+  "findings": [
+    {
+      "id": "PR-1",
+      "severity": "medium",
+      "category": "validation",
+      "description": "",
+      "required_action": "",
+      "status": "open",
+      "resolution_evidence": ""
+    }
+  ],
+  "summary": {
+    "total": 1,
+    "by_severity": {
+      "low": 0,
+      "medium": 1,
+      "high": 0,
+      "critical": 0
+    },
+    "resolved": 0,
+    "open": 1
+  },
+  "re_review": {
+    "required": true,
+    "completed_at": "",
+    "notes": ""
+  }
+}

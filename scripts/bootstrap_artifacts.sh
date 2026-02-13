@@ -14,7 +14,7 @@ if [ -z "$BASE" ]; then
   mkdir -p "$BASE"
 fi
 
-for f in mission-plan.md validation-matrix.json run-log.md final-report.md; do
+for f in mission-plan.md validation-matrix.json run-log.md final-report.md principal-review.md principal-review.json; do
   if [ ! -f "$BASE/$f" ]; then
     : > "$BASE/$f"
     echo "Created $BASE/$f"

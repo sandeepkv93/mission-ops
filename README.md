@@ -23,7 +23,9 @@ Use Mission Ops when you want:
 6. Adaptive execution mode selection
 7. Controlled execution
 8. Final verification gate
-9. Evidence and closeout
+9. Principal Engineer review gate
+10. Review comment resolution
+11. Evidence and closeout
 
 ## Adaptive Execution Modes
 
@@ -63,12 +65,16 @@ Artifacts:
 - `validation-matrix.json`
 - `run-log.md`
 - `final-report.md`
+- `principal-review.md`
+- `principal-review.json`
 
 Template references:
 
 - `references/mission-plan-template.md`
 - `references/final-report-template.md`
 - `references/validation-matrix-template.json`
+- `references/principal-review-template.md`
+- `references/principal-review-template.json`
 
 ## Installation
 
@@ -133,7 +139,9 @@ flowchart TD
     G --> H{"Checkpoint Re-eval<br/>mode still optimal?"}
     H -- "No" --> F
     H -- "Yes" --> I["Final Verification Gate<br/>Regression + broader checks"]
-    I --> J["Evidence & Closeout<br/>mission-plan, validation-matrix, run-log, final-report"]
+    I --> J["Principal Engineer Review Gate<br/>Independent review + findings"]
+    J --> K["Review Resolution Gate<br/>Resolve all findings + re-review"]
+    K --> L["Evidence & Closeout<br/>mission-plan, validation-matrix, run-log, final-report, principal-review"]
 ```
 
 ## Usage
@@ -153,6 +161,8 @@ Mission Ops final response includes:
 - `Execution mode`
 - `Result`
 - `Validation`
+- `Principal review`
+- `Review resolution`
 - `Confidence`
 - `Open risks`
 - `Next step`
@@ -169,7 +179,9 @@ mission-ops/
 │   ├── gates-and-checklists.md
 │   ├── mission-plan-template.md
 │   ├── final-report-template.md
-│   └── validation-matrix-template.json
+│   ├── validation-matrix-template.json
+│   ├── principal-review-template.md
+│   └── principal-review-template.json
 └── scripts/
     ├── install.sh
     └── bootstrap_artifacts.sh

@@ -30,3 +30,5 @@
 - Preflight gate criteria:
 - Per-batch gate criteria:
 - Final gate criteria:
+- Principal review gate criteria:
+- Review resolution gate criteria:
